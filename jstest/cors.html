@@ -29,7 +29,8 @@ fetch('https://www.reddit.com/api/v1/access_token', {
 	'body': encodeURI(postData)
 }).then(function(response) {
 	var body = document.querySelector('body');
-	var access_token = body['access_token'];
+	console.log(response.json());
+	var access_token = response.json()['access_token'];
     body.textContent = 'access_token: ' + access_token;
 });
 
