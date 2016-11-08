@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<body>
+<script>
+
+var clientID = '...';
+var postData = {
+	'grant_type': 'https://oauth.reddit.com/grants/installed_client',
+	'device_id': 'DO_NOT_TRACK_THIS_DEVICE',
+	'scope': 'read'
+};
+
+function encodeURI(obj) {
+	var temp = [];
+	for (var k in obj) {
+		temp.push(encodeURIComponent(k) + '=' + encodeURIComponent(obj[k]));
+	}
+	return temp.join('&');
+}
+
+var headers = new Headers({
+	'Content-Type': 'application/x-www-form-urlencoded',
+	'Authorization': 'Basic ' + clientID + ':';
+});
+
+fetch('https://www.reddit.com/api/v1/access_token', {
+	'method': 'POST',
+	'headers': headers,
+	'body': encodeURI(postData)
+}).then(function(response) {
+    console.log(response.json());
+});
+
+</script> 
+</body>
+</html>
+
