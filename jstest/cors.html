@@ -28,10 +28,10 @@ fetch('https://www.reddit.com/api/v1/access_token', {
 	'headers': headers,
 	'body': encodeURI(postData)
 }).then(function(response) {
-	var body = document.querySelector('body');
-	console.log(response.json());
-	var access_token = response.json()['access_token'];
-    body.textContent = 'access_token: ' + access_token;
+	response.json().then(function(json) {
+		var body = document.querySelector('body');
+		body.textContent = 'access_token: ' + json['access_token'];
+	});
 });
 
 </script> 
